@@ -1,6 +1,6 @@
 import { InputGroup, Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 
-const Login = () => {
+const Register = () => {
   return (
     <Container>
       <Row className='vh-100 d-flex justify-content-center align-items-center'>
@@ -10,27 +10,32 @@ const Login = () => {
               <div className='mb-3 mt-4'>
                 <Form>
                   <Row className='mb-3'>
+                    <Form.Group className='mb-3' controlId='formUsername'>
+                      <Form.Label className='text-center'>Username</Form.Label>
+                      <Form.Control type='email' placeholder='Enter username' />
+                    </Form.Group>
+
                     <Form.Group className='mb-3' controlId='formEmail'>
-                      <Form.Label className='text-center'>Email address</Form.Label>
+                      <Form.Label>Email</Form.Label>
                       <Form.Control type='email' placeholder='Enter email' />
                     </Form.Group>
 
                     <Form.Group className='mb-3' controlId='formBasicPassword'>
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type='password' placeholder='Password' />
+                      <Form.Control type='password' placeholder='Enter password' />
                     </Form.Group>
                   </Row>
                   <div className='d-grid'>
                     <Button variant='dark' type='submit'>
-                      Login
+                      Register
                     </Button>
                   </div>
                 </Form>
                 <div className='mt-3'>
                   <p className='mb-0  text-center'>
-                    Don't have an account?{' '}
+                    Already have an account?{' '}
                     <a href="{''}" className='text-dark fw-bold'>
-                      Register
+                      Login
                     </a>
                   </p>
                 </div>
@@ -43,4 +48,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
