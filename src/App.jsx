@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navigationbar from './components/Navbar/Navigationbar';
+import Navibar from './components/Navbar/NaviBar';
 
 function App() {
   return (
     <Router>
-      <Navigationbar />
+      <Navibar />
     </Router>
   );
 }

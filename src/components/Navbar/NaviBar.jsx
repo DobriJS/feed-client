@@ -1,7 +1,7 @@
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const Navigationbar = () => {
+const NaviBar = () => {
   return (
     <Navbar bg='dark' variant='dark' expand='lg' sticky='top'>
       <Container>
@@ -21,4 +21,4 @@ const Navigationbar = () => {
   );
 };
 
-export default Navigationbar;
+export default NaviBar;
