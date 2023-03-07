@@ -1,6 +1,10 @@
-import { InputGroup, Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 
 const Register = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   return (
     <Container>
       <Row className='vh-100 d-flex justify-content-center align-items-center'>
@@ -8,26 +12,38 @@ const Register = () => {
           <Card className='shadow'>
             <Card.Body>
               <div className='mb-3 mt-4'>
-                <Form>
+                <Form onSubmit={handleSubmit(onSubmit)}>
                   <Row className='mb-3'>
                     <Form.Group className='mb-3'>
                       <Form.Label className='text-center'>Username</Form.Label>
-                      <Form.Control type='email' placeholder='Enter username' />
+                      <Form.Control
+                        {...register('username')}
+                        type='text'
+                        placeholder='Enter username'
+                      />
                     </Form.Group>
 
                     <Form.Group className='mb-3'>
                       <Form.Label>Email</Form.Label>
-                      <Form.Control type='email' placeholder='Enter email' />
+                      <Form.Control {...register('email')} type='email' placeholder='Enter email' />
                     </Form.Group>
 
                     <Form.Group className='mb-3'>
                       <Form.Label>Picture</Form.Label>
-                      <Form.Control type='image' src='' placeholder='Your profile picture' />
+                      <Form.Control
+                        {...register('picture')}
+                        type='text'
+                        placeholder='Your profile picture'
+                      />
                     </Form.Group>
 
                     <Form.Group className='mb-3'>
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type='password' placeholder='Enter password' />
+                      <Form.Control
+                        {...register('password')}
+                        type='password'
+                        placeholder='Enter password'
+                      />
                     </Form.Group>
                   </Row>
                   <div className='d-grid'>
