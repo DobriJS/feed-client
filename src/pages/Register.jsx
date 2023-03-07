@@ -10,17 +10,22 @@ const Register = () => {
               <div className='mb-3 mt-4'>
                 <Form>
                   <Row className='mb-3'>
-                    <Form.Group className='mb-3' controlId='formUsername'>
+                    <Form.Group className='mb-3'>
                       <Form.Label className='text-center'>Username</Form.Label>
                       <Form.Control type='email' placeholder='Enter username' />
                     </Form.Group>
 
-                    <Form.Group className='mb-3' controlId='formEmail'>
+                    <Form.Group className='mb-3'>
                       <Form.Label>Email</Form.Label>
                       <Form.Control type='email' placeholder='Enter email' />
                     </Form.Group>
 
-                    <Form.Group className='mb-3' controlId='formBasicPassword'>
+                    <Form.Group className='mb-3'>
+                      <Form.Label>Picture</Form.Label>
+                      <Form.Control type='image' src='' placeholder='Your profile picture' />
+                    </Form.Group>
+
+                    <Form.Group className='mb-3'>
                       <Form.Label>Password</Form.Label>
                       <Form.Control type='password' placeholder='Enter password' />
                     </Form.Group>
