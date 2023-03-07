@@ -1,6 +1,10 @@
-import { InputGroup, Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 
 const Login = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   return (
     <Container>
       <Row className='vh-100 d-flex justify-content-center align-items-center'>
@@ -8,16 +12,30 @@ const Login = () => {
           <Card className='shadow'>
             <Card.Body>
               <div className='mb-3 mt-4'>
-                <Form>
+                <Form onSubmit={handleSubmit(onSubmit)}>
                   <Row className='mb-3'>
-                    <Form.Group className='mb-3' controlId='formEmail'>
+                    <Form.Group className='mb-3'>
                       <Form.Label className='text-center'>Email address</Form.Label>
-                      <Form.Control type='email' placeholder='Enter email' />
+                      <Form.Control
+                        {...register('email', { required: 'Email is required' })}
+                        type='email'
+                        placeholder='Enter email'
+                      />
+                      {errors.email && (
+                        <Form.Text className='text-danger'>{errors.email.message}</Form.Text>
+                      )}
                     </Form.Group>
 
-                    <Form.Group className='mb-3' controlId='formBasicPassword'>
+                    <Form.Group className='mb-3'>
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type='password' placeholder='Password' />
+                      <Form.Control
+                        {...register('password', { required: 'Password is required' })}
+                        type='password'
+                        placeholder='Password'
+                      />
+                      {errors.password && (
+                        <Form.Text className='text-danger'>{errors.password.message}</Form.Text>
+                      )}
                     </Form.Group>
                   </Row>
                   <div className='d-grid'>

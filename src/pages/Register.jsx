@@ -1,6 +1,14 @@
-import { InputGroup, Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 
 const Register = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   return (
     <Container>
       <Row className='vh-100 d-flex justify-content-center align-items-center'>
@@ -8,21 +16,57 @@ const Register = () => {
           <Card className='shadow'>
             <Card.Body>
               <div className='mb-3 mt-4'>
-                <Form>
+                <Form onSubmit={handleSubmit(onSubmit)}>
                   <Row className='mb-3'>
-                    <Form.Group className='mb-3' controlId='formUsername'>
+                    <Form.Group className='mb-3'>
                       <Form.Label className='text-center'>Username</Form.Label>
-                      <Form.Control type='email' placeholder='Enter username' />
+                      <Form.Control
+                        {...register('username', {
+                          required: 'Username is required',
+                          maxLength: 20
+                        })}
+                        type='text'
+                        placeholder='Enter username'
+                      />
+                      {errors.username && (
+                        <Form.Text className='text-danger'>{errors.username.message}</Form.Text>
+                      )}
                     </Form.Group>
 
-                    <Form.Group className='mb-3' controlId='formEmail'>
+                    <Form.Group className='mb-3'>
                       <Form.Label>Email</Form.Label>
-                      <Form.Control type='email' placeholder='Enter email' />
+                      <Form.Control
+                        {...register('email', { required: 'Email is required', maxLength: 20 })}
+                        type='email'
+                        placeholder='Enter email'
+                      />
+                      {errors.email && (
+                        <Form.Text className='text-danger'>{errors.email.message}</Form.Text>
+                      )}
                     </Form.Group>
 
-                    <Form.Group className='mb-3' controlId='formBasicPassword'>
+                    <Form.Group className='mb-3'>
+                      <Form.Label>Picture</Form.Label>
+                      <Form.Control
+                        {...register('picture')}
+                        type='text'
+                        placeholder='Your profile picture'
+                      />
+                    </Form.Group>
+
+                    <Form.Group className='mb-3'>
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type='password' placeholder='Enter password' />
+                      <Form.Control
+                        {...register('password', {
+                          required: 'Password is required',
+                          maxLength: 20
+                        })}
+                        type='password'
+                        placeholder='Enter password'
+                      />
+                      {errors.password && (
+                        <Form.Text className='text-danger'>{errors.password.message}</Form.Text>
+                      )}
                     </Form.Group>
                   </Row>
                   <div className='d-grid'>
