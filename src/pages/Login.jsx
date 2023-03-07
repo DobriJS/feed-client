@@ -2,7 +2,11 @@ import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit
+  } = useForm();
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -18,6 +22,7 @@ const Login = () => {
                       <Form.Label className='text-center'>Email address</Form.Label>
                       <Form.Control
                         {...register('email', { required: 'Email is required' })}
+                        isInvalid={errors.email ? 'true' : 'false'}
                         type='email'
                         placeholder='Enter email'
                       />
@@ -30,6 +35,7 @@ const Login = () => {
                       <Form.Label>Password</Form.Label>
                       <Form.Control
                         {...register('password', { required: 'Password is required' })}
+                        isInvalid={errors.password ? 'true' : 'false'}
                         type='password'
                         placeholder='Password'
                       />

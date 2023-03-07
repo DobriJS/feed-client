@@ -1,13 +1,32 @@
+import { useEffect } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../features/auth/authActions';
 
 const Register = () => {
+  const { loading, userInfo, error, success } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const {
     register,
     formState: { errors },
     handleSubmit
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // redirect user to login page if registration was successful
+    if (success) navigate('/login');
+    // redirect authenticated user to profile screen
+    if (userInfo) navigate('/profile');
+  }, [navigate, userInfo, success]);
+
+  const onSubmit = (data) => {
+    // transform email string to lowercase to avoid case sensitivity issues in login
+    data.email = data.email.toLowerCase();
+    dispatch(registerUser(data));
+  };
 
   return (
     <Container>
@@ -25,6 +44,7 @@ const Register = () => {
                           required: 'Username is required',
                           maxLength: 20
                         })}
+                        isInvalid={errors.username ? 'true' : 'false'}
                         type='text'
                         placeholder='Enter username'
                       />
@@ -37,6 +57,7 @@ const Register = () => {
                       <Form.Label>Email</Form.Label>
                       <Form.Control
                         {...register('email', { required: 'Email is required', maxLength: 20 })}
+                        isInvalid={errors.email ? 'true' : 'false'}
                         type='email'
                         placeholder='Enter email'
                       />
@@ -61,6 +82,7 @@ const Register = () => {
                           required: 'Password is required',
                           maxLength: 20
                         })}
+                        isInvalid={errors.password ? 'true' : 'false'}
                         type='password'
                         placeholder='Enter password'
                       />
@@ -70,7 +92,7 @@ const Register = () => {
                     </Form.Group>
                   </Row>
                   <div className='d-grid'>
-                    <Button variant='dark' type='submit'>
+                    <Button variant='dark' type='submit' disabled={loading}>
                       Register
                     </Button>
                   </div>
