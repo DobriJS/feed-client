@@ -16,16 +16,26 @@ const Login = () => {
                   <Row className='mb-3'>
                     <Form.Group className='mb-3'>
                       <Form.Label className='text-center'>Email address</Form.Label>
-                      <Form.Control {...register('email')} type='email' placeholder='Enter email' />
+                      <Form.Control
+                        {...register('email', { required: 'Email is required' })}
+                        type='email'
+                        placeholder='Enter email'
+                      />
+                      {errors.email && (
+                        <Form.Text className='text-danger'>{errors.email.message}</Form.Text>
+                      )}
                     </Form.Group>
 
                     <Form.Group className='mb-3'>
                       <Form.Label>Password</Form.Label>
                       <Form.Control
-                        {...register('password')}
+                        {...register('password', { required: 'Password is required' })}
                         type='password'
                         placeholder='Password'
                       />
+                      {errors.password && (
+                        <Form.Text className='text-danger'>{errors.password.message}</Form.Text>
+                      )}
                     </Form.Group>
                   </Row>
                   <div className='d-grid'>

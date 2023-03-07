@@ -2,7 +2,11 @@ import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 
 const Register = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit
+  } = useForm();
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -17,15 +21,28 @@ const Register = () => {
                     <Form.Group className='mb-3'>
                       <Form.Label className='text-center'>Username</Form.Label>
                       <Form.Control
-                        {...register('username')}
+                        {...register('username', {
+                          required: 'Username is required',
+                          maxLength: 20
+                        })}
                         type='text'
                         placeholder='Enter username'
                       />
+                      {errors.username && (
+                        <Form.Text className='text-danger'>{errors.username.message}</Form.Text>
+                      )}
                     </Form.Group>
 
                     <Form.Group className='mb-3'>
                       <Form.Label>Email</Form.Label>
-                      <Form.Control {...register('email')} type='email' placeholder='Enter email' />
+                      <Form.Control
+                        {...register('email', { required: 'Email is required', maxLength: 20 })}
+                        type='email'
+                        placeholder='Enter email'
+                      />
+                      {errors.email && (
+                        <Form.Text className='text-danger'>{errors.email.message}</Form.Text>
+                      )}
                     </Form.Group>
 
                     <Form.Group className='mb-3'>
@@ -40,10 +57,16 @@ const Register = () => {
                     <Form.Group className='mb-3'>
                       <Form.Label>Password</Form.Label>
                       <Form.Control
-                        {...register('password')}
+                        {...register('password', {
+                          required: 'Password is required',
+                          maxLength: 20
+                        })}
                         type='password'
                         placeholder='Enter password'
                       />
+                      {errors.password && (
+                        <Form.Text className='text-danger'>{errors.password.message}</Form.Text>
+                      )}
                     </Form.Group>
                   </Row>
                   <div className='d-grid'>
