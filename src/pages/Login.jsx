@@ -1,6 +1,10 @@
-import { InputGroup, Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 
 const Login = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   return (
     <Container>
       <Row className='vh-100 d-flex justify-content-center align-items-center'>
@@ -8,16 +12,20 @@ const Login = () => {
           <Card className='shadow'>
             <Card.Body>
               <div className='mb-3 mt-4'>
-                <Form>
+                <Form onSubmit={handleSubmit(onSubmit)}>
                   <Row className='mb-3'>
                     <Form.Group className='mb-3'>
                       <Form.Label className='text-center'>Email address</Form.Label>
-                      <Form.Control type='email' placeholder='Enter email' />
+                      <Form.Control {...register('email')} type='email' placeholder='Enter email' />
                     </Form.Group>
 
                     <Form.Group className='mb-3'>
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type='password' placeholder='Password' />
+                      <Form.Control
+                        {...register('password')}
+                        type='password'
+                        placeholder='Password'
+                      />
                     </Form.Group>
                   </Row>
                   <div className='d-grid'>
