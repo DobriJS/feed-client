@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser } from './authActions';
+import { registerUser, userLogin } from './authActions';
+
+const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 const initialState = {
   loading: false,
   userInfo: null, // for user object
-  userToken: null, // for storing the JWT
+  userToken, // for storing the JWT
   error: null,
   success: false // for monitoring the registration process.
 };
@@ -14,6 +16,19 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    [userLogin.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [userLogin.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.userInfo = payload;
+      state.userToken = payload.token;
+    },
+    [userLogin.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
     [registerUser.pending]: (state) => {
       state.loading = true;
       state.error = null;

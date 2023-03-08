@@ -1,5 +1,9 @@
+import { useEffect } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin } from '../features/auth/authActions';
 
 const Login = () => {
   const {
@@ -7,7 +11,21 @@ const Login = () => {
     formState: { errors },
     handleSubmit
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const { loading, userInfo, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/profile');
+    }
+  }, [navigate, userInfo]);
+
+  const onSubmit = (data) => {
+    dispatch(userLogin(data));
+  };
 
   return (
     <Container>
@@ -40,7 +58,7 @@ const Login = () => {
                     </Form.Group>
                   </Row>
                   <div className='d-grid'>
-                    <Button variant='dark' type='submit'>
+                    <Button variant='dark' type='submit' disabled={loading}>
                       Login
                     </Button>
                   </div>
