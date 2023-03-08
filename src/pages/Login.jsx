@@ -21,27 +21,22 @@ const Login = () => {
                     <Form.Group className='mb-3'>
                       <Form.Label className='text-center'>Email address</Form.Label>
                       <Form.Control
-                        {...register('email', { required: 'Email is required' })}
-                        isInvalid={errors.email ? 'true' : 'false'}
+                        {...register('email', { required: true })}
                         type='email'
                         placeholder='Enter email'
                       />
-                      {errors.email && (
-                        <Form.Text className='text-danger'>{errors.email.message}</Form.Text>
+                      {errors.email && errors.email.type === 'required' && (
+                        <p className='text-danger'>Email is required.</p>
                       )}
                     </Form.Group>
 
                     <Form.Group className='mb-3'>
                       <Form.Label>Password</Form.Label>
                       <Form.Control
-                        {...register('password', { required: 'Password is required' })}
-                        isInvalid={errors.password ? 'true' : 'false'}
+                        {...register('password', { required: true })}
                         type='password'
                         placeholder='Password'
                       />
-                      {errors.password && (
-                        <Form.Text className='text-danger'>{errors.password.message}</Form.Text>
-                      )}
                     </Form.Group>
                   </Row>
                   <div className='d-grid'>
