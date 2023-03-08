@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Col, Button, Row, Container, Card, Form, Alert } from 'react-bootstrap';
+import { Col, Button, Row, Container, Card, Form, Alert, Spinner } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -16,10 +16,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // redirect user to login page if registration was successful
-    if (success) navigate('/login');
     // redirect authenticated user to profile screen
     if (userInfo) navigate('/profile');
+    // redirect user to login page if registration was successful
+    if (success) navigate('/login');
   }, [navigate, userInfo, success]);
 
   const onSubmit = (data) => {
@@ -31,6 +31,7 @@ const Register = () => {
   return (
     <Container>
       <Row className='vh-100 d-flex justify-content-center align-items-center'>
+        {error && <Alert variant='danger'>{error}</Alert>}
         <Col md={10} lg={8} xs={12}>
           <Card className='shadow'>
             <Card.Body>
@@ -102,7 +103,7 @@ const Register = () => {
                   </Row>
                   <div className='d-grid'>
                     <Button variant='dark' type='submit' disabled={loading}>
-                      Register
+                      {loading ? <Spinner variant='dark' /> : 'Register'}
                     </Button>
                   </div>
                 </Form>

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { Col, Button, Row, Container, Card, Form, Spinner } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -35,6 +35,7 @@ const Login = () => {
             <Card.Body>
               <div className='mb-3 mt-4'>
                 <Form onSubmit={handleSubmit(onSubmit)}>
+                  {error && <Alert variant='danger'>{error}</Alert>}
                   <Row className='mb-3'>
                     <Form.Group className='mb-3'>
                       <Form.Label className='text-center'>Email address</Form.Label>
@@ -59,7 +60,7 @@ const Login = () => {
                   </Row>
                   <div className='d-grid'>
                     <Button variant='dark' type='submit' disabled={loading}>
-                      Login
+                      {loading ? <Spinner variant='dark' /> : 'Login'}
                     </Button>
                   </div>
                 </Form>
