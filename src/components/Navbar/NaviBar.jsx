@@ -1,9 +1,16 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../features/auth/authSlice';
 
 const NaviBar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
       <Container>
@@ -11,19 +18,18 @@ const NaviBar = () => {
           FEED
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-        <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='me-auto'>
+        <Navbar.Collapse id='responsive-navbar-nav' className='justify-content-end'>
+          <Nav>
             <Nav.Link as={Link} to='/profile'>
               Profile
             </Nav.Link>
-          </Nav>
-          <Nav>
             <Nav.Link as={Link} to='/register'>
               Register
             </Nav.Link>
             <Nav.Link as={Link} to='/login'>
               Login
             </Nav.Link>
+            <Nav.Link onClick={onLogout}>Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

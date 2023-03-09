@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Col, Button, Row, Container, Card, Form, Alert, Spinner } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { registerUser } from '../features/auth/authActions';
 
 const Register = () => {
@@ -17,7 +17,7 @@ const Register = () => {
 
   useEffect(() => {
     // redirect authenticated user to profile screen
-    if (userInfo) navigate('/profile');
+    if (userInfo) navigate('/');
     // redirect user to login page if registration was successful
     if (success) navigate('/login');
   }, [navigate, userInfo, success]);
@@ -110,9 +110,9 @@ const Register = () => {
                 <div className='mt-3'>
                   <p className='mb-0  text-center'>
                     Already have an account?{' '}
-                    <a href="{''}" className='text-dark fw-bold'>
+                    <Link to={'/login'} className='text-dark fw-bold'>
                       Login
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
