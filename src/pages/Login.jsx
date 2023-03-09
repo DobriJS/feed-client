@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Col, Button, Row, Container, Card, Form, Spinner } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../features/auth/authActions';
 
@@ -67,9 +67,9 @@ const Login = () => {
                 <div className='mt-3'>
                   <p className='mb-0  text-center'>
                     Don't have an account?{' '}
-                    <a href="{''}" className='text-dark fw-bold'>
+                    <Link to={'/register'} className='text-dark fw-bold'>
                       Register
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
