@@ -6,7 +6,7 @@ import { logout } from '../../features/auth/authSlice';
 const NaviBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.auth);
 
   const onLogout = () => {
     dispatch(logout());
@@ -21,7 +21,7 @@ const NaviBar = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav' className='justify-content-end'>
-          {isLoggedIn ? (
+          {userInfo ? (
             <Nav>
               <Nav.Link as={Link} to='/profile'>
                 Profile
