@@ -12,20 +12,18 @@ const Login = () => {
     handleSubmit
   } = useForm();
 
-  const { loading, userInfo, error } = useSelector((state) => state.auth);
+  const { loading, isLoggedIn, error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userInfo) {
+    if (isLoggedIn) {
       navigate('/profile');
     }
-  }, [navigate, userInfo]);
+  }, [navigate, isLoggedIn]);
 
-  const onSubmit = (data) => {
-    dispatch(userLogin(data));
-  };
+  const onSubmit = (data) => dispatch(userLogin(data));
 
   return (
     <Container>

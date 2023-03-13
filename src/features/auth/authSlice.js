@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser, userLogin } from './authActions';
+import { registerUser, userLogin, getCurrentUser } from './authActions';
 
 const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 const initialState = {
+  isAuth: false,
+  isLoggedIn: false,
   loading: false,
   userInfo: null, // for user object
   userToken, // for storing the JWT
@@ -16,24 +18,37 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      localStorage.removeItem('userToken'); // deletes token from storage
+      localStorage.removeItem('userToken');
       state.loading = false;
       state.userInfo = null;
       state.userToken = null;
       state.error = null;
+      state.isLoggedIn = false;
     }
   },
   extraReducers: {
+    [getCurrentUser.pending]: (state) => {
+      state.isAuth = false;
+      state.loading = true;
+      state.error = null;
+    },
+    [getCurrentUser.fulfilled]: (state, { payload }) => {
+      state.isAuth = true;
+      state.loading = false;
+      state.userInfo = payload;
+    },
     [userLogin.pending]: (state) => {
+      state.isLoggedIn = false;
       state.loading = true;
       state.error = null;
     },
     [userLogin.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.userInfo = payload;
+      state.isLoggedIn = true;
       state.userToken = payload.token;
     },
     [userLogin.rejected]: (state, { payload }) => {
+      state.isLoggedIn = false;
       state.loading = false;
       state.error = payload;
     },
@@ -43,7 +58,7 @@ const authSlice = createSlice({
     },
     [registerUser.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.success = true; // registration successful
+      state.success = true;
     },
     [registerUser.rejected]: (state, { payload }) => {
       state.loading = false;
