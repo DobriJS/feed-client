@@ -1,14 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getCurrentUser } from '../features/auth/authActions';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
   const { userInfo } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCurrentUser());
-  }, [dispatch]);
 
   return (
     <section className='vh-100'>
@@ -19,14 +12,14 @@ const Profile = () => {
               <div className='card-body text-center'>
                 <div className='mt-3 mb-4'>
                   <img
-                    src={userInfo.pic}
+                    src={userInfo?.pic}
                     className='rounded-circle img-fluid'
                     style={{ width: '120px' }}
                   />
                 </div>
-                <h4 className='mb-2 text-light'>{userInfo.username}</h4>
+                <h4 className='mb-2 text-light'>{userInfo?.username}</h4>
                 <p className='text-muted mb-4'>
-                  <span className='mx-2 text-light'>{userInfo.email}</span>
+                  <span className='mx-2 text-light'>{userInfo?.email}</span>
                 </p>
                 <div className='mb-4 pb-2'>
                   <button type='button' className='btn btn-outline-light btn-floating'>

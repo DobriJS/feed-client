@@ -1,12 +1,22 @@
+import { useEffect } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../features/auth/authSlice';
+import { logout, setCredentials } from '../../features/auth/authSlice';
+import { useGetDetailsQuery } from '../../features/auth/authService';
 
 const NaviBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
+
+  const { data, isFetching } = useGetDetailsQuery('userDetails', {
+    pollingInterval: 900000 // 15mins
+  });
+
+  useEffect(() => {
+    if (data) dispatch(setCredentials(data));
+  }, [data, dispatch]);
 
   const onLogout = () => {
     dispatch(logout());
