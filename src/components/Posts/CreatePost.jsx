@@ -23,7 +23,7 @@ const CreatePost = () => {
     resolver: yupResolver(postSchemaValidation)
   });
 
-  const { status, error } = useSelector((state) => state.posts);
+  const { status } = useSelector((state) => state.posts);
 
   const handleCreatePost = (data) => {
     let newPost = {

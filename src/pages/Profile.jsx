@@ -18,6 +18,7 @@ const Profile = () => {
                     src={userInfo?.pic}
                     className='rounded-circle img-fluid'
                     style={{ width: '120px' }}
+                    alt='avatar'
                   />
                 </div>
                 <h4 className='mb-2 text-light'>{userInfo?.username}</h4>

@@ -36,7 +36,7 @@ const PostDetails = () => {
   const { userInfo, isLoggedIn } = useSelector((state) => state.auth);
   const { status } = useSelector((state) => state.posts);
 
-  const isAuthor = userInfo?._id == post?.postedBy?._id;
+  const isAuthor = userInfo?._id === post?.postedBy?._id;
 
   const onEditClick = () => navigate(`/edit-post/${post._id}`);
 
