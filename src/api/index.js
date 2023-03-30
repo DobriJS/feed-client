@@ -6,7 +6,7 @@ export const renderDeploymentAPI_URL = 'https://feed-api-2h09.onrender.com';
 const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 const API = axios.create({
-  renderDeploymentAPI_URL
+  baseURL: renderDeploymentAPI_URL
 });
 
 API.interceptors.request.use((req) => {
