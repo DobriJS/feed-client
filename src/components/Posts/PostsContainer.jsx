@@ -8,14 +8,14 @@ import LoadingSpinner from '../Spinner/LoadingSpinner';
 const PostsContainer = () => {
   const posts = useSelector(selectAllPosts);
   const { status } = useSelector((state) => state.posts);
-  console.log(posts);
+
   let contentToRender = '';
 
   contentToRender =
     status === 'pending' ? (
-      <>
+      <div className='mt-2'>
         <LoadingSpinner />
-      </>
+      </div>
     ) : Array.isArray(posts) && posts.length > 0 ? (
       <>
         <AddPostButton />
