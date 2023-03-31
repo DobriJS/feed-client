@@ -8,6 +8,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { fetchAllPosts } from './features/post/postsActions';
 import { getCurrentUser } from './features/auth/authActions';
+
 async function main() {
   store.dispatch(fetchAllPosts());
   store.dispatch(getCurrentUser());
