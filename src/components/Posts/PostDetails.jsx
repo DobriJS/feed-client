@@ -27,6 +27,7 @@ const PostDetails = () => {
     return {
       text: comment?.text,
       username: comment?.postedBy?.username,
+      authorId: comment?.postedBy?._id,
       pic: comment?.postedBy?.pic,
       createdAt: comment.createdAt,
       id: comment._id

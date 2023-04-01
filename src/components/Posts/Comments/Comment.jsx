@@ -1,6 +1,8 @@
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import { DeleteIcon } from '../../../utils/Icons';
 
-const Comment = ({ pic, username, text, dateOfcreation }) => {
+const Comment = ({ pic, username, text, dateOfcreation, isCommentAuthor }) => {
   return (
     <Card className='mt-1' bg='dark' text='light'>
       <Card.Header>
@@ -15,9 +17,18 @@ const Comment = ({ pic, username, text, dateOfcreation }) => {
       </Card.Header>
       <Card.Body>
         <Card.Text>{text}</Card.Text>
-        <div className='text-center'>
-          <Card.Footer as='span'>{dateOfcreation}</Card.Footer>
-        </div>
+        <Card.Footer>
+          <div className='d-flex justify-content-between'>
+            <span>{dateOfcreation}</span>
+            {isCommentAuthor && (
+              <span>
+                <Button variant='light' type='button'>
+                  <DeleteIcon />
+                </Button>
+              </span>
+            )}
+          </div>
+        </Card.Footer>
       </Card.Body>
     </Card>
   );
