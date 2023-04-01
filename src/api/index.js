@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 export const baseURL = 'http://localhost:4000';
-export const renderDeploymentAPI_URL = 'https://feed-api-2h09.onrender.com';
+export const renderDeploymentAPI_URL = 'https://feed-api-5cww.onrender.com';
 
 const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 const API = axios.create({
-  baseURL: renderDeploymentAPI_URL
+  baseURL: baseURL
 });
 
 API.interceptors.request.use((req) => {
