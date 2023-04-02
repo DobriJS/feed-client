@@ -38,3 +38,5 @@ export const updatePost = (post) => API.put(`/edit-post/${post._id}`, post);
 export const deletePost = (id) => API.delete(`/delete-post/${id}`);
 export const likePost = (id) => API.put('/like', { id });
 export const makeComment = (comment) => API.put('/comment', { comment });
+export const deleteComment = (postId, commentId) =>
+  API.put(`/delete-comment/${commentId}`, { postId });

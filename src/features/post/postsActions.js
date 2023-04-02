@@ -82,6 +82,23 @@ export const makeComment = createAsyncThunk(
   }
 );
 
+export const deleteComment = createAsyncThunk(
+  'posts/deleteComment',
+  async ({ postId, commentId }, { rejectWithValue }) => {
+    try {
+      const response = await API.deleteComment(postId, commentId);
+
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 export const likePost = createAsyncThunk('posts/likePost', async (id, { rejectWithValue }) => {
   try {
     const response = await API.likePost(id);

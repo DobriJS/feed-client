@@ -6,7 +6,8 @@ import {
   updatePost,
   deletePost,
   likePost,
-  makeComment
+  makeComment,
+  deleteComment
 } from './postsActions';
 
 const initialState = {
@@ -65,6 +66,11 @@ const postsSlice = createSlice({
       state.error = payload;
     });
     builder.addCase(makeComment.fulfilled, (state, { payload }) => {
+      state.status = 'idle';
+      state.posts = state.posts.filter((post) => post._id !== payload._id);
+      state.posts.unshift(payload);
+    });
+    builder.addCase(deleteComment.fulfilled, (state, { payload }) => {
       state.status = 'idle';
       state.posts = state.posts.filter((post) => post._id !== payload._id);
       state.posts.unshift(payload);
