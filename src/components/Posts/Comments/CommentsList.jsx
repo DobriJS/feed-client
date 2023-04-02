@@ -1,14 +1,14 @@
 import Comment from './Comment';
-import { formatDate } from '../../../utils/dateFormatter';
 
 const CommentsList = ({ comments }) => {
   return comments?.map((comment) => (
     <Comment
-      key={comment.id}
-      username={comment.username}
-      pic={comment.pic}
+      key={comment._id}
+      username={comment.postedBy.username}
+      pic={comment.postedBy.pic}
       text={comment.text}
-      dateOfcreation={formatDate(comment.createdAt)}
+      createdAt={comment.createdAt}
+      commentId={comment._id}
     />
   ));
 };

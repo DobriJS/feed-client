@@ -11,6 +11,7 @@ import DeletePostConfirmation from './DeletePostConfirmation';
 import PostInteractionButtons from '../Buttons/PostInteractionButtons';
 import PostAuthorInteractionButtons from '../Buttons/PostAuthorInteractionButtons';
 import AddCommentModal from './Comments/AddCommentModal';
+
 import CommentsList from './Comments/CommentsList';
 
 const PostDetails = () => {
@@ -18,23 +19,19 @@ const PostDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const [showModal, setShowModal] = useState(false);
-  const [showAddCommentModal, setShowAddCommentModal] = useState(false);
-
+  const { status } = useSelector((state) => state.posts);
   const post = useSelector(selectPostById(id));
 
   const comments = post?.comments?.map((comment) => {
     return {
-      text: comment?.text,
-      username: comment?.postedBy?.username,
-      pic: comment?.postedBy?.pic,
-      createdAt: comment.createdAt,
-      id: comment._id
+      ...comment
     };
   });
 
   const { userInfo, isLoggedIn } = useSelector((state) => state.auth);
-  const { status } = useSelector((state) => state.posts);
+
+  const [showModal, setShowModal] = useState(false);
+  const [showAddCommentModal, setShowAddCommentModal] = useState(false);
 
   const isAuthor = userInfo?._id === post?.postedBy?._id;
 
@@ -74,7 +71,7 @@ const PostDetails = () => {
       />
 
       <Container>
-        <Card className='text-center mt-2' bg='dark' text='light'>
+        <Card className='text-center mt-2 mb-1' bg='dark' text='light'>
           <Card.Img variant='top' src={post?.image} />
           <Card.Body>
             <Card.Title>{post?.title}</Card.Title>

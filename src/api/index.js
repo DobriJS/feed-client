@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const baseURL = 'http://localhost:4000';
-export const renderDeploymentAPI_URL = 'https://feed-api-2h09.onrender.com';
+export const renderDeploymentAPI_URL = 'https://feed-api-5cww.onrender.com';
 
 const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
@@ -38,3 +38,5 @@ export const updatePost = (post) => API.put(`/edit-post/${post._id}`, post);
 export const deletePost = (id) => API.delete(`/delete-post/${id}`);
 export const likePost = (id) => API.put('/like', { id });
 export const makeComment = (comment) => API.put('/comment', { comment });
+export const deleteComment = (postId, commentId) =>
+  API.put(`/delete-comment/${commentId}`, { postId });
