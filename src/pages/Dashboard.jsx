@@ -8,6 +8,7 @@ import AuthGuard from './Guards/AuthGuard';
 import CreatePost from '../components/Posts/CreatePost';
 import PostDetails from '../components/Posts/PostDetails';
 import EditPost from '../components/Posts/EditPost';
+import CommentsSection from '../components/Posts/Comments/CommentsSection';
 
 const Dashboard = () => {
   return (
@@ -19,6 +20,7 @@ const Dashboard = () => {
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/edit-post/:id' element={<EditPost />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='posts/:id/comments' element={<CommentsSection />} />
         </Route>
         <Route path='/posts/:id' element={<PostDetails />} />
         <Route path='/register' element={<Register />} />
