@@ -11,7 +11,8 @@ import DeletePostConfirmation from './DeletePostConfirmation';
 import PostInteractionButtons from '../Buttons/PostInteractionButtons';
 import PostAuthorInteractionButtons from '../Buttons/PostAuthorInteractionButtons';
 import AddCommentModal from './Comments/AddCommentModal';
-import Button from 'react-bootstrap/Button';
+
+import CommentsList from './Comments/CommentsList';
 
 const PostDetails = () => {
   const navigate = useNavigate();
@@ -20,12 +21,17 @@ const PostDetails = () => {
 
   const { status } = useSelector((state) => state.posts);
   const post = useSelector(selectPostById(id));
+
+  const comments = post?.comments?.map((comment) => {
+    return {
+      ...comment
+    };
+  });
+
   const { userInfo, isLoggedIn } = useSelector((state) => state.auth);
 
   const [showModal, setShowModal] = useState(false);
   const [showAddCommentModal, setShowAddCommentModal] = useState(false);
-
-  const handleComments = () => navigate(`/posts/${post._id}/comments`);
 
   const isAuthor = userInfo?._id === post?.postedBy?._id;
 
@@ -65,7 +71,7 @@ const PostDetails = () => {
       />
 
       <Container>
-        <Card className='text-center mt-2' bg='dark' text='light'>
+        <Card className='text-center mt-2 mb-1' bg='dark' text='light'>
           <Card.Img variant='top' src={post?.image} />
           <Card.Body>
             <Card.Title>{post?.title}</Card.Title>
@@ -87,11 +93,8 @@ const PostDetails = () => {
           </Card.Body>
           <Card.Footer>{formatDate(post?.createdAt)}</Card.Footer>
         </Card>
-        <div className='d-grid gap-2 mt-1'>
-          <Button size='lg' onClick={handleComments} variant='dark'>
-            See comments section
-          </Button>
-        </div>
+
+        <CommentsList comments={comments} />
       </Container>
     </>
   );

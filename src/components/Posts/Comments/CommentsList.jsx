@@ -1,19 +1,14 @@
 import Comment from './Comment';
-import { useSelector } from 'react-redux';
-
-import { formatDate } from '../../../utils/dateFormatter';
 
 const CommentsList = ({ comments }) => {
-  const { userInfo } = useSelector((state) => state.auth);
-
   return comments?.map((comment) => (
     <Comment
-      key={comment.id}
-      username={comment.username}
-      pic={comment.pic}
+      key={comment._id}
+      username={comment.postedBy.username}
+      pic={comment.postedBy.pic}
       text={comment.text}
-      dateOfcreation={formatDate(comment.createdAt)}
-      isCommentAuthor={userInfo?.username === comment.username}
+      createdAt={comment.createdAt}
+      commentId={comment._id}
     />
   ));
 };

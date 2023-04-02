@@ -24,6 +24,7 @@ const AddCommentModal = ({
   } = useForm({
     resolver: yupResolver(commentSchemaValidation)
   });
+
   const dispatch = useDispatch();
 
   const handleAddComment = (data) => {
@@ -44,7 +45,7 @@ const AddCommentModal = ({
         <Modal.Body>
           <Form onSubmit={handleSubmit(handleAddComment)}>
             <Form.Group className='mb-3'>
-              <FloatingLabel label='Comment'>
+              <FloatingLabel>
                 <Form.Control {...register('text')} as='textarea' rows={6} type='text' />
               </FloatingLabel>
               <p className='text-danger'>{errors.text?.message}</p>
