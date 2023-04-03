@@ -6,7 +6,7 @@ export const renderDeploymentAPI_URL = 'https://feed-api-5cww.onrender.com';
 const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 const API = axios.create({
-  baseURL: renderDeploymentAPI_URL
+  baseURL: baseURL
 });
 
 API.interceptors.request.use((req) => {
@@ -19,6 +19,7 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+// AUTH API ENDPOINTS
 export const registerUser = ({ username, email, picture, password }) => {
   return API.post('/auth/register', { username, email, picture, password });
 };
@@ -29,10 +30,8 @@ export const loginUser = ({ email, password }) => {
 
 export const getCurrentUser = () => API.get('/user/profile');
 
-//
 // POST API ENDPOINTS
 export const fetchAllPosts = () => API.get('/');
-export const getPostById = (id) => API.get(`/${id}`);
 export const createPost = (newPost) => API.post('/create-post', newPost);
 export const updatePost = (post) => API.put(`/edit-post/${post._id}`, post);
 export const deletePost = (id) => API.delete(`/delete-post/${id}`);
