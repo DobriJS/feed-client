@@ -14,5 +14,5 @@ export const postSchemaValidation = yup.object().shape({
   image: yup
     .string()
     .url()
-    .matches(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/, 'Please enter a valid image URL')
+    .matches(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|svg)/, 'Please enter a valid image URL')
 });
