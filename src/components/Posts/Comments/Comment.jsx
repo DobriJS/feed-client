@@ -33,19 +33,19 @@ const Comment = ({ pic, username, text, createdAt, commentId }) => {
             width='60'
             height='60'
           />
-          <span className='fw-bold'>{username}</span>
+          <span className='fw-bold fs-5'>{username}</span>
         </Card.Header>
         <Card.Body>
           <Card.Text>{text}</Card.Text>
-          <Card.Footer>
+          <Card.Footer className='border-white border-top-3 border-bottom-0'>
             <div className='d-flex justify-content-between'>
-              <span>{formatDate(createdAt)}</span>
+              <div className='mt-2'>{formatDate(createdAt)}</div>
               {isAuthor && (
-                <span>
+                <div className='mt-1'>
                   <Button onClick={handleDeleteComment} variant='light' type='button'>
                     <DeleteIcon />
                   </Button>
-                </span>
+                </div>
               )}
             </div>
           </Card.Footer>

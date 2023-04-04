@@ -79,8 +79,8 @@ const PostDetails = () => {
             <Card className='text-center mt-2 mb-1' bg='dark' text='light'>
               <Image fluid alt='post image' src={post?.image} />
               <Card.Body>
-                <Card.Title>{post?.title}</Card.Title>
-                <Card.Text>{post?.body}</Card.Text>
+                <Card.Title className='fs-3'>{post?.title}</Card.Title>
+                <Card.Text className='fs-5'>{post?.body}</Card.Text>
 
                 <PostInteractionButtons
                   isLoggedIn={isLoggedIn}
@@ -96,7 +96,9 @@ const PostDetails = () => {
                   openDeleteModalHandler={openDeleteModalHandler}
                 />
               </Card.Body>
-              <Card.Footer>{formatDate(post?.createdAt)}</Card.Footer>
+              <Card.Footer className='border-white border-top-3 border-bottom-0'>
+                {formatDate(post?.createdAt)}
+              </Card.Footer>
             </Card>
 
             <CommentsList comments={comments} />
