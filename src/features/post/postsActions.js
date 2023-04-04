@@ -17,23 +17,6 @@ export const fetchAllPosts = createAsyncThunk(
   }
 );
 
-export const getPostById = createAsyncThunk(
-  'posts/getPostById',
-  async (id, { rejectWithValue }) => {
-    try {
-      const response = await API.getPostById(id);
-      const post = await response.data;
-      return post;
-    } catch (error) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
-      } else {
-        return rejectWithValue(error.message);
-      }
-    }
-  }
-);
-
 export const createPost = createAsyncThunk(
   'posts/createPost',
   async (newPost, { rejectWithValue }) => {
