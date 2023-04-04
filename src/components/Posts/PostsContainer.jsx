@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
 import { selectAllPosts } from '../../features/post/postsSlice';
 
-import AddPostButton from '../Buttons/AddPostButton';
+import CreatePostButton from '../Buttons/CreatePostButton';
 import PostsList from './PostsList';
+import SearchPostBar from './SearchPostBar';
 import LoadingSpinner from '../Spinner/LoadingSpinner';
 
 const PostsContainer = () => {
@@ -18,7 +19,8 @@ const PostsContainer = () => {
       </div>
     ) : Array.isArray(posts) && posts.length > 0 ? (
       <>
-        <AddPostButton />
+        <CreatePostButton />
+        <SearchPostBar />
         <PostsList posts={posts} />
       </>
     ) : (
