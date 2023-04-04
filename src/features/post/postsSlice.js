@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchAllPosts,
   createPost,
-  getPostById,
   updatePost,
   deletePost,
   likePost,
@@ -43,45 +42,37 @@ const postsSlice = createSlice({
     builder.addCase(createPost.rejected, (state, { payload }) => {
       state.error = payload;
     });
-    builder.addCase(getPostById.pending, (state) => {
-      state.status = 'pending';
-      state.error = null;
-    });
-    builder.addCase(getPostById.fulfilled, (state, { payload }) => {
-      /*    state.status = 'idle';
-      state.singlePost = payload; */
-    });
-    builder.addCase(getPostById.rejected, (state, { payload }) => {
-      state.error = payload;
-    });
     builder.addCase(updatePost.pending, (state) => {
       state.status = 'pending';
     });
     builder.addCase(updatePost.fulfilled, (state, { payload }) => {
       state.status = 'idle';
-      state.posts = state.posts.filter((post) => post._id !== payload._id);
-      state.posts.unshift(payload);
+      const post = state.posts.find((post) => post._id === payload._id);
+      const idx = state.posts.indexOf(post);
+      state.posts[idx] = payload;
     });
     builder.addCase(updatePost.rejected, (state, { payload }) => {
       state.error = payload;
     });
     builder.addCase(makeComment.fulfilled, (state, { payload }) => {
       state.status = 'idle';
-      state.posts = state.posts.filter((post) => post._id !== payload._id);
-      state.posts.unshift(payload);
+      const post = state.posts.find((post) => post._id === payload._id);
+      const idx = state.posts.indexOf(post);
+      state.posts[idx] = payload;
     });
     builder.addCase(deleteComment.fulfilled, (state, { payload }) => {
-      state.status = 'idle';
-      state.posts = state.posts.filter((post) => post._id !== payload._id);
-      state.posts.unshift(payload);
+      const post = state.posts.find((post) => post._id === payload._id);
+      const idx = state.posts.indexOf(post);
+      state.posts[idx] = payload;
     });
     builder.addCase(likePost.pending, (state) => {
       state.status = 'pending';
     });
     builder.addCase(likePost.fulfilled, (state, { payload }) => {
       state.status = 'idle';
-      state.posts = state.posts.filter((post) => post._id !== payload._id);
-      state.posts.unshift(payload);
+      const post = state.posts.find((post) => post._id === payload._id);
+      const idx = state.posts.indexOf(post);
+      state.posts[idx] = payload;
     });
     builder.addCase(deletePost.pending, (state) => {
       state.status = 'pending';

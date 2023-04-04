@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { makeComment } from '../../../features/post/postsActions';
 import { commentSchemaValidation } from '../../../utils/commentSchemaValidation';
@@ -26,6 +27,7 @@ const AddCommentModal = ({
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleAddComment = (data) => {
     let comment = {
@@ -33,6 +35,7 @@ const AddCommentModal = ({
       postId
     };
     dispatch(makeComment(comment));
+    navigate(`/posts/${postId}`);
     reset();
   };
 

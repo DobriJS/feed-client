@@ -8,8 +8,8 @@ import Post from './Post';
 
 const PostsList = ({ posts }) => {
   return (
-    <Container fluid className='mt-1'>
-      <Row xs={1} md={3} className='g-3'>
+    <Container fluid className='mt-1 mb-2'>
+      <Row xs={1} md={3} className='g-2'>
         {posts &&
           posts.map((post) => (
             <Col key={post?._id}>
