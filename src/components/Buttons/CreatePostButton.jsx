@@ -6,17 +6,9 @@ const AddPostButton = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='text-center mb-1'>
-      <Button
-        variant='light'
-        type='button'
-        onClick={() => {
-          navigate('/create-post');
-        }}
-      >
-        <AddIcon />
-      </Button>
-    </div>
+    <Button variant='light' type='button' onClick={() => navigate('/create-post')}>
+      <AddIcon />
+    </Button>
   );
 };
 
