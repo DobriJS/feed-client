@@ -7,6 +7,9 @@ import { formatDate } from '../../utils/dateFormatter';
 
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
+import Image from 'react-bootstrap/Image';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import DeletePostConfirmation from './DeletePostConfirmation';
 import PostInteractionButtons from '../Buttons/PostInteractionButtons';
 import PostAuthorInteractionButtons from '../Buttons/PostAuthorInteractionButtons';
@@ -71,30 +74,34 @@ const PostDetails = () => {
       />
 
       <Container>
-        <Card className='text-center mt-2 mb-1' bg='dark' text='light'>
-          <Card.Img variant='top' src={post?.image} />
-          <Card.Body>
-            <Card.Title>{post?.title}</Card.Title>
-            <Card.Text>{post?.body}</Card.Text>
+        <Row>
+          <Col className='col-md-8 offset-md-2'>
+            <Card className='text-center mt-2 mb-1' bg='dark' text='light'>
+              <Image fluid alt='post image' src={post?.image} />
+              <Card.Body>
+                <Card.Title>{post?.title}</Card.Title>
+                <Card.Text>{post?.body}</Card.Text>
 
-            <PostInteractionButtons
-              isLoggedIn={isLoggedIn}
-              handlePostLike={handlePostLike}
-              openAddCommentModalHandler={openAddCommentModalHandler}
-              likes={post?.likes?.length}
-              postId={post?._id}
-            />
+                <PostInteractionButtons
+                  isLoggedIn={isLoggedIn}
+                  handlePostLike={handlePostLike}
+                  openAddCommentModalHandler={openAddCommentModalHandler}
+                  likes={post?.likes?.length}
+                  postId={post?._id}
+                />
 
-            <PostAuthorInteractionButtons
-              isAuthor={isAuthor}
-              onEditClick={onEditClick}
-              openDeleteModalHandler={openDeleteModalHandler}
-            />
-          </Card.Body>
-          <Card.Footer>{formatDate(post?.createdAt)}</Card.Footer>
-        </Card>
+                <PostAuthorInteractionButtons
+                  isAuthor={isAuthor}
+                  onEditClick={onEditClick}
+                  openDeleteModalHandler={openDeleteModalHandler}
+                />
+              </Card.Body>
+              <Card.Footer>{formatDate(post?.createdAt)}</Card.Footer>
+            </Card>
 
-        <CommentsList comments={comments} />
+            <CommentsList comments={comments} />
+          </Col>
+        </Row>
       </Container>
     </>
   );
