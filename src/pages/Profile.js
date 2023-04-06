@@ -21,9 +21,9 @@ const Profile = () => {
                     alt='avatar'
                   />
                 </div>
-                <h4 className='mb-2 text-light'>{userInfo?.username}</h4>
+                <p className='mb-2 text-light fs-3'>{userInfo?.username}</p>
                 <p className='text-muted mb-4'>
-                  <span className='mx-2 text-light'>{userInfo?.email}</span>
+                  <span className='mx-2 text-light fs-5'>{userInfo?.email}</span>
                 </p>
                 <div className='mb-4 pb-2'>
                   <Button variant='light'>
