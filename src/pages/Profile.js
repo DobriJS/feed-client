@@ -35,10 +35,14 @@ const Profile = () => {
                 </div>
                 <div className='d-grid gap-2'>
                   <Link to={'/create-post'}>
-                    <Button variant='light'>Add post</Button>
+                    <Button variant='light'>
+                      <span className='fs-4'>Add Post</span>
+                    </Button>
                   </Link>
                   <Link to={'/'}>
-                    <Button variant='light'>Go to Posts</Button>
+                    <Button variant='light'>
+                      <span className='fs-5'>Go to POSTS</span>
+                    </Button>
                   </Link>
                 </div>
                 <div className='d-flex justify-content-between text-center mt-5 mb-2'>

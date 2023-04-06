@@ -21,27 +21,29 @@ const PostsContainer = () => {
 
   return (
     <>
-      <div className='d-flex justify-content-center align-items-center mt-1'>
-        <CreatePostButton />
-        <Form>
-          <Row className='justify-content-center'>
-            <Col xs='auto'>
-              <Form.Control
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                type='text'
-                className='ms-1'
-                size='lg'
-                placeholder='Search ...'
-              />
-            </Col>
-          </Row>
-        </Form>
-      </div>
       {status === 'pending' ? (
         <LoadingSpinner />
       ) : (
-        <PostsList posts={filteredPosts.length > 0 ? filteredPosts : posts} />
+        <>
+          <div className='d-flex justify-content-center align-items-center mt-1'>
+            <CreatePostButton />
+            <Form>
+              <Row className='justify-content-center'>
+                <Col xs='auto'>
+                  <Form.Control
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    type='text'
+                    className='ms-1'
+                    size='lg'
+                    placeholder='Search ...'
+                  />
+                </Col>
+              </Row>
+            </Form>
+          </div>
+          <PostsList posts={filteredPosts.length > 0 ? filteredPosts : posts} />
+        </>
       )}
     </>
   );
