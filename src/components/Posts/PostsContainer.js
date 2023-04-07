@@ -13,7 +13,7 @@ const PostsContainer = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const posts = useSelector(selectAllPosts);
-  const { status } = useSelector((state) => state.posts);
+  const { loading } = useSelector((state) => state.posts);
 
   const filteredPosts = posts.filter((post) => {
     return post.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -21,7 +21,7 @@ const PostsContainer = () => {
 
   return (
     <>
-      {status === 'pending' ? (
+      {loading ? (
         <LoadingSpinner />
       ) : (
         <>
@@ -35,7 +35,6 @@ const PostsContainer = () => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     type='text'
                     className='ms-1'
-                    size='lg'
                     placeholder='Search ...'
                   />
                 </Col>

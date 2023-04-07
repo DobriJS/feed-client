@@ -23,7 +23,7 @@ const CreatePost = () => {
     resolver: yupResolver(postSchemaValidation)
   });
 
-  const { status } = useSelector((state) => state.posts);
+  const { loading } = useSelector((state) => state.posts);
 
   const handleCreatePost = (data) => {
     let newPost = {
@@ -67,8 +67,8 @@ const CreatePost = () => {
             </Form.Group>
 
             <div className='d-grid gap-1'>
-              <Button variant='dark' type='submit' disabled={status === 'pending'}>
-                {status === 'pending' ? 'Saving...' : 'Save'}
+              <Button variant='dark' type='submit' disabled={loading}>
+                Save
               </Button>
               <Button onClick={onCancelClick} variant='dark'>
                 Cancel

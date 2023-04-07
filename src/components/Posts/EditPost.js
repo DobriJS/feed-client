@@ -17,8 +17,9 @@ const EditPost = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+
   const post = useSelector(selectPostById(id));
-  const { status } = useSelector((state) => state.posts);
+  const { loading } = useSelector((state) => state.posts);
   const {
     control,
     handleSubmit,
@@ -43,9 +44,7 @@ const EditPost = () => {
     navigate(`/posts/${post._id}`);
   };
 
-  const cancelUpdatePost = () => {
-    navigate(`/posts/${post._id}`);
-  };
+  const cancelUpdatePost = () => navigate(`/posts/${post._id}`);
 
   return (
     <Container className='mt-2'>
@@ -96,8 +95,8 @@ const EditPost = () => {
               <p className='text-danger'>{errors.image?.message}</p>
             </Form.Group>
             <div className='d-grid gap-2'>
-              <Button variant='dark' type='submit' disabled={status === 'pending'}>
-                {status === 'pending' ? 'Editing...' : 'Edit'}
+              <Button variant='dark' type='submit' disabled={loading}>
+                Edit
               </Button>
               <Button onClick={cancelUpdatePost} variant='dark'>
                 Cancel
