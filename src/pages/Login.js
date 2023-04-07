@@ -68,13 +68,7 @@ const Login = () => {
                     <Button variant='dark' type='submit' disabled={loading}>
                       {loading ? (
                         <>
-                          <Spinner
-                            variant='dark'
-                            as='span'
-                            animation='border'
-                            role='status'
-                            aria-hidden='true'
-                          />
+                          <Spinner as='span' animation='border' role='status' aria-hidden='true' />
                           <span className='visually-hidden'>Loading...</span>
                         </>
                       ) : (
