@@ -8,7 +8,7 @@ const Post = ({ image, title, body, author }) => {
         <Card.Title className='fs-4'>{title}</Card.Title>
         <Card.Text>{body}</Card.Text>
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer className='border-white border-top-3 border-bottom-0'>
         <small>Author: {author}</small>
       </Card.Footer>
     </Card>

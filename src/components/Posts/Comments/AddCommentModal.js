@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { makeComment } from '../../../features/post/postsActions';
 import { commentSchemaValidation } from '../../../utils/commentSchemaValidation';
 
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -14,8 +13,8 @@ const AddCommentModal = ({
   showAddCommentModal,
   hideAddCommentModalHandler,
   confirmHideAddCommentModalHandler,
-  title,
-  postId
+  postId,
+  loading
 }) => {
   const {
     register,
@@ -43,14 +42,12 @@ const AddCommentModal = ({
     <>
       <Modal show={showAddCommentModal} onHide={hideAddCommentModalHandler}>
         <Modal.Header closeButton>
-          <Modal.Title>{title}</Modal.Title>
+          <Modal.Title>Add your comment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit(handleAddComment)}>
             <Form.Group className='mb-3'>
-              <FloatingLabel>
-                <Form.Control {...register('text')} as='textarea' rows={6} type='text' />
-              </FloatingLabel>
+              <Form.Control {...register('text')} as='textarea' rows={3} type='text' />
               <p className='text-danger'>{errors.text?.message}</p>
             </Form.Group>
             <Button
@@ -58,6 +55,7 @@ const AddCommentModal = ({
               type='submit'
               variant='dark'
               onClick={confirmHideAddCommentModalHandler}
+              disabled={loading}
             >
               Save
             </Button>

@@ -81,7 +81,20 @@ const Register = () => {
                   </Row>
                   <div className='d-grid'>
                     <Button variant='dark' type='submit' disabled={loading}>
-                      {loading ? <Spinner variant='dark' /> : 'Register'}
+                      {loading ? (
+                        <>
+                          <Spinner
+                            variant='dark'
+                            as='span'
+                            animation='border'
+                            role='status'
+                            aria-hidden='true'
+                          />
+                          <span className='visually-hidden'>Loading...</span>
+                        </>
+                      ) : (
+                        'Register'
+                      )}
                     </Button>
                   </div>
                 </Form>

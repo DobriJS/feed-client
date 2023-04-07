@@ -21,9 +21,9 @@ const Profile = () => {
                     alt='avatar'
                   />
                 </div>
-                <h4 className='mb-2 text-light'>{userInfo?.username}</h4>
+                <p className='mb-2 text-light fs-3'>{userInfo?.username}</p>
                 <p className='text-muted mb-4'>
-                  <span className='mx-2 text-light'>{userInfo?.email}</span>
+                  <span className='mx-2 text-light fs-5'>{userInfo?.email}</span>
                 </p>
                 <div className='mb-4 pb-2'>
                   <Button variant='light'>
@@ -35,10 +35,14 @@ const Profile = () => {
                 </div>
                 <div className='d-grid gap-2'>
                   <Link to={'/create-post'}>
-                    <Button variant='light'>Add post</Button>
+                    <Button variant='light'>
+                      <span className='fs-4'>Add Post</span>
+                    </Button>
                   </Link>
                   <Link to={'/'}>
-                    <Button variant='light'>Go to Posts</Button>
+                    <Button variant='light'>
+                      <span className='fs-5'>Go to POSTS</span>
+                    </Button>
                   </Link>
                 </div>
                 <div className='d-flex justify-content-between text-center mt-5 mb-2'>

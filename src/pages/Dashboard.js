@@ -8,6 +8,7 @@ import AuthGuard from './Guards/AuthGuard';
 import CreatePost from '../components/Posts/CreatePost';
 import PostDetails from '../components/Posts/PostDetails';
 import EditPost from '../components/Posts/EditPost';
+import ErrorPage from './ErrorPage';
 
 const Dashboard = () => {
   return (
@@ -23,6 +24,7 @@ const Dashboard = () => {
         <Route path='/posts/:id' element={<PostDetails />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='*' element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -22,8 +22,11 @@ const PostDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { status } = useSelector((state) => state.posts);
+  const { loading } = useSelector((state) => state.posts);
   const post = useSelector(selectPostById(id));
+
+  const { userInfo, isLoggedIn } = useSelector((state) => state.auth);
+  const isAuthor = userInfo?._id === post?.postedBy?._id;
 
   const comments = post?.comments?.map((comment) => {
     return {
@@ -31,17 +34,16 @@ const PostDetails = () => {
     };
   });
 
-  const { userInfo, isLoggedIn } = useSelector((state) => state.auth);
-
   const [showModal, setShowModal] = useState(false);
-  const [showAddCommentModal, setShowAddCommentModal] = useState(false);
-
-  const isAuthor = userInfo?._id === post?.postedBy?._id;
-
-  const onEditClick = () => navigate(`/edit-post/${post._id}`);
-
   const openDeleteModalHandler = () => setShowModal(true);
   const hideDeleteModalHandler = () => setShowModal(false);
+
+  const [showAddCommentModal, setShowAddCommentModal] = useState(false);
+  const openAddCommentModalHandler = () => setShowAddCommentModal(true);
+  const hideAddCommentModalHandler = () => setShowAddCommentModal(false);
+
+  const onEditClick = () => navigate(`/edit-post/${post._id}`);
+  const handlePostLike = () => dispatch(likePost(post._id));
 
   const confirmDeleteModalHandler = () => {
     dispatch(deletePost(post._id));
@@ -49,28 +51,21 @@ const PostDetails = () => {
     navigate('/');
   };
 
-  const openAddCommentModalHandler = () => setShowAddCommentModal(true);
-  const hideAddCommentModalHandler = () => setShowAddCommentModal(false);
-
-  const handlePostLike = () => dispatch(likePost(post._id));
-
   return (
     <>
       <DeletePostConfirmation
-        title='Delete Confirmation!'
-        body='Are sure to delete this item'
         showModal={showModal}
-        apiStatus={status}
+        loading={loading}
         hideDeleteModalHandler={hideDeleteModalHandler}
         confirmDeleteModalHandler={confirmDeleteModalHandler}
       />
 
       <AddCommentModal
-        title='Add your comment'
         showAddCommentModal={showAddCommentModal}
         hideAddCommentModalHandler={hideAddCommentModalHandler}
         confirmHideAddCommentModalHandler={hideAddCommentModalHandler}
         postId={post?._id}
+        loading={loading}
       />
 
       <Container>

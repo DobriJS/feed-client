@@ -66,7 +66,14 @@ const Login = () => {
                   </Row>
                   <div className='d-grid'>
                     <Button variant='dark' type='submit' disabled={loading}>
-                      {loading ? <Spinner variant='dark' /> : 'Login'}
+                      {loading ? (
+                        <>
+                          <Spinner as='span' animation='border' role='status' aria-hidden='true' />
+                          <span className='visually-hidden'>Loading...</span>
+                        </>
+                      ) : (
+                        'Login'
+                      )}
                     </Button>
                   </div>
                 </Form>

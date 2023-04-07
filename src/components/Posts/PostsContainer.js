@@ -13,7 +13,7 @@ const PostsContainer = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const posts = useSelector(selectAllPosts);
-  const { status } = useSelector((state) => state.posts);
+  const { loading } = useSelector((state) => state.posts);
 
   const filteredPosts = posts.filter((post) => {
     return post.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -21,27 +21,28 @@ const PostsContainer = () => {
 
   return (
     <>
-      <div className='d-flex justify-content-center align-items-center mt-1'>
-        <CreatePostButton />
-        <Form>
-          <Row className='justify-content-center'>
-            <Col xs='auto'>
-              <Form.Control
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                type='text'
-                className='ms-1'
-                size='lg'
-                placeholder='Search ...'
-              />
-            </Col>
-          </Row>
-        </Form>
-      </div>
-      {status === 'pending' ? (
+      {loading ? (
         <LoadingSpinner />
       ) : (
-        <PostsList posts={filteredPosts.length > 0 ? filteredPosts : posts} />
+        <>
+          <div className='d-flex justify-content-center align-items-center mt-1'>
+            <CreatePostButton />
+            <Form>
+              <Row className='justify-content-center'>
+                <Col xs='auto'>
+                  <Form.Control
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    type='text'
+                    className='ms-1'
+                    placeholder='Search ...'
+                  />
+                </Col>
+              </Row>
+            </Form>
+          </div>
+          <PostsList posts={filteredPosts.length > 0 ? filteredPosts : posts} />
+        </>
       )}
     </>
   );
