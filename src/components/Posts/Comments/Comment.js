@@ -15,8 +15,6 @@ const Comment = ({ pic, username, text, createdAt, commentId }) => {
 
   const { userInfo } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.posts);
-  console.log(loading);
-  const isAuthor = userInfo?.username === username;
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -59,11 +57,11 @@ const Comment = ({ pic, username, text, createdAt, commentId }) => {
           <span className='fw-bold fs-5'>{username}</span>
         </Card.Header>
         <Card.Body>
-          <Card.Text className='fs-'>{text}</Card.Text>
+          <Card.Text className='fs-6'>{text}</Card.Text>
           <Card.Footer className='border-white border-top-3 border-bottom-0'>
             <div className='d-flex justify-content-between'>
               <div className='mt-2 fs-6'>{formatDate(createdAt)}</div>
-              {isAuthor && (
+              {userInfo?.username === username && (
                 <div className='mt-1'>
                   <Button onClick={handleShow} variant='light' type='button' disabled={loading}>
                     <DeleteIcon />

@@ -9,7 +9,7 @@ import Navbar from 'react-bootstrap/Navbar';
 const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { userToken } = useSelector((state) => state.auth);
 
   const onLogout = () => {
     dispatch(logout());
@@ -24,7 +24,7 @@ const Navigation = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav' className='justify-content-end'>
-          {isLoggedIn ? (
+          {userToken ? (
             <Nav>
               <Nav.Link className='fs-5' as={Link} to='/profile'>
                 Profile

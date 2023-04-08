@@ -14,19 +14,17 @@ import DeletePostConfirmation from './DeletePostConfirmation';
 import PostInteractionButtons from '../Buttons/PostInteractionButtons';
 import PostAuthorInteractionButtons from '../Buttons/PostAuthorInteractionButtons';
 import AddCommentModal from './Comments/AddCommentModal';
-
 import CommentsList from './Comments/CommentsList';
+import LoadingSpinner from '../Spinner/LoadingSpinner';
 
 const PostDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  const { userInfo, userToken } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.posts);
   const post = useSelector(selectPostById(id));
-
-  const { userInfo, isLoggedIn } = useSelector((state) => state.auth);
-  const isAuthor = userInfo?._id === post?.postedBy?._id;
 
   const comments = post?.comments?.map((comment) => {
     return {
@@ -71,32 +69,38 @@ const PostDetails = () => {
       <Container>
         <Row>
           <Col className='col-md-8 offset-md-2'>
-            <Card className='text-center mt-2 mb-1' bg='dark' text='light'>
-              <Image fluid alt='post image' src={post?.image} />
-              <Card.Body>
-                <Card.Title className='fs-3'>{post?.title}</Card.Title>
-                <Card.Text className='fs-5'>{post?.body}</Card.Text>
+            {!post ? (
+              <LoadingSpinner />
+            ) : (
+              <>
+                <Card className='text-center mt-2 mb-1' bg='dark' text='light'>
+                  <Image fluid alt='post image' src={post?.image} />
+                  <Card.Body>
+                    <Card.Title className='fs-3'>{post?.title}</Card.Title>
+                    <Card.Text className='fs-5'>{post?.body}</Card.Text>
 
-                <PostInteractionButtons
-                  isLoggedIn={isLoggedIn}
-                  handlePostLike={handlePostLike}
-                  openAddCommentModalHandler={openAddCommentModalHandler}
-                  likes={post?.likes?.length}
-                  postId={post?._id}
-                />
+                    <PostInteractionButtons
+                      userToken={userToken}
+                      handlePostLike={handlePostLike}
+                      openAddCommentModalHandler={openAddCommentModalHandler}
+                      likes={post?.likes?.length}
+                      postId={post?._id}
+                    />
 
-                <PostAuthorInteractionButtons
-                  isAuthor={isAuthor}
-                  onEditClick={onEditClick}
-                  openDeleteModalHandler={openDeleteModalHandler}
-                />
-              </Card.Body>
-              <Card.Footer className='border-white border-top-3 border-bottom-0'>
-                {formatDate(post?.createdAt)}
-              </Card.Footer>
-            </Card>
+                    <PostAuthorInteractionButtons
+                      isAuthor={userInfo?._id === post?.postedBy?._id}
+                      onEditClick={onEditClick}
+                      openDeleteModalHandler={openDeleteModalHandler}
+                    />
+                  </Card.Body>
+                  <Card.Footer className='border-white border-top-3 border-bottom-0'>
+                    {formatDate(post?.createdAt)}
+                  </Card.Footer>
+                </Card>
 
-            <CommentsList comments={comments} />
+                <CommentsList comments={comments} />
+              </>
+            )}
           </Col>
         </Row>
       </Container>

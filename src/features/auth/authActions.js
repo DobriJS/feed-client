@@ -24,7 +24,6 @@ export const userLogin = createAsyncThunk(
       const { data } = await API.loginUser({ email, password });
 
       localStorage.setItem('userToken', data.token);
-      dispatch(setLoggedIn(true));
 
       return data;
     } catch (error) {
@@ -39,16 +38,13 @@ export const userLogin = createAsyncThunk(
 
 export const getCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
-  async (_, { rejectWithValue, dispatch }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const response = await API.getCurrentUser();
       const data = await response.data;
+
       if (response.data.username) {
-        dispatch(setLoggedIn(true));
         return data;
-      } else {
-        dispatch(setLoggedIn(false));
-        return;
       }
     } catch (error) {
       if (error.response && error.response.data.message) {

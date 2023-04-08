@@ -4,7 +4,6 @@ import { registerUser, userLogin, getCurrentUser } from './authActions';
 const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 const initialState = {
-  isLoggedIn: false,
   loading: false,
   userInfo: null,
   userToken,
@@ -16,16 +15,12 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setLoggedIn: (state, { payload }) => {
-      state.isLoggedIn = payload;
-    },
     logout: (state) => {
       localStorage.removeItem('userToken');
       state.loading = false;
       state.userInfo = null;
       state.userToken = null;
       state.error = null;
-      state.isLoggedIn = false;
     }
   },
   extraReducers: (builder) => {

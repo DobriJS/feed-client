@@ -31,8 +31,8 @@ const Register = () => {
   });
 
   useEffect(() => {
-    if (userInfo) navigate('/profile');
     if (success) navigate('/login');
+    if (userInfo) navigate('/profile');
   }, [navigate, userInfo, success]);
 
   const onSubmit = (data) => {

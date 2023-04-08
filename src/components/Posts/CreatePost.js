@@ -15,6 +15,7 @@ import Container from 'react-bootstrap/Container';
 const CreatePost = () => {
   const disptach = useDispatch();
   const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
@@ -34,8 +35,6 @@ const CreatePost = () => {
     disptach(createPost(newPost));
     navigate('/');
   };
-
-  const onCancelClick = () => navigate('/');
 
   return (
     <Container className='mt-2'>
@@ -70,7 +69,7 @@ const CreatePost = () => {
               <Button variant='dark' type='submit' disabled={loading}>
                 Save
               </Button>
-              <Button onClick={onCancelClick} variant='dark'>
+              <Button onClick={() => navigate('/')} variant='dark'>
                 Cancel
               </Button>
             </div>

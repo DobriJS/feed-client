@@ -1,11 +1,12 @@
 import { Outlet } from 'react-router-dom';
-import Login from '../Login';
 import { useSelector } from 'react-redux';
 
-const AuthGuard = () => {
-  const { isLoggedIn } = useSelector((state) => state.auth);
+import Login from '../Login';
 
-  return isLoggedIn ? <Outlet /> : <Login />;
+const AuthGuard = () => {
+  const { userToken } = useSelector((state) => state.auth);
+
+  return userToken ? <Outlet /> : <Login />;
 };
 
 export default AuthGuard;
