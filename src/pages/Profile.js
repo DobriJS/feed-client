@@ -10,7 +10,7 @@ const Profile = () => {
 
   return (
     <>
-      {loading && !userInfo ? (
+      {loading ? (
         <LoadingSpinner />
       ) : (
         <section className='vh-100'>
