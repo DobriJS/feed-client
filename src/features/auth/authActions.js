@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setLoggedIn } from './authSlice';
 import * as API from '../../api/index';
 
 export const registerUser = createAsyncThunk(
