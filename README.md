@@ -70,7 +70,7 @@ The project uses a Node.js API for data storage and retrieval. The following API
 This project is a fully functional social media platform built using React, Redux, and Node.js. It allows users to create posts, like and comment on posts, and view other users' profiles. The project demonstrates the use of Redux for state management and a Node.js API for data storage and retrieval.
 
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Deployment
+- Live example here ---> https://feed-media.netlify.app
+- Backend API ---> https://feed-api-5cww.onrender.com  **!! You can add to URL '/apic-docs' to see the Swagger docs for more info about the server endpoints**
 
