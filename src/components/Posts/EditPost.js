@@ -44,8 +44,6 @@ const EditPost = () => {
     navigate(`/posts/${post._id}`);
   };
 
-  const cancelUpdatePost = () => navigate(`/posts/${post._id}`);
-
   return (
     <Container className='mt-2'>
       <div className='text-center'>
@@ -98,7 +96,7 @@ const EditPost = () => {
               <Button variant='dark' type='submit' disabled={loading}>
                 Edit
               </Button>
-              <Button onClick={cancelUpdatePost} variant='dark'>
+              <Button onClick={() => navigate(`/posts/${post._id}`)} variant='dark'>
                 Cancel
               </Button>
             </div>
